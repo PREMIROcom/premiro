@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Page</title>
+
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="premro styels/product detal.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="cart.js"></script>
+
+    <script>
+        /* ==========================================================
+           🔵 CHANGE ONLY THESE 4 LINES FOR EVERY PRODUCT
+           ========================================================== */
+
+        const PRODUCT_ID = "product9";   /* 🔵 CHANGE THIS for next product */
+        const PRODUCT_NAME = "YVES BISSOUMA";  /* 🔵 CHANGE THIS */
+        const PRODUCT_PRICE = 5;      /* 🔵 CHANGE THIS */
+        const inStock = false;         /* 🔵 true = in stock | false = sold out (pre-order) */
+
+        /* ==========================================================
+           DO NOT CHANGE ANYTHING BELOW THIS LINE
+           ========================================================== */
+    </script>
+</head>
+
+<body style="font-family:Arial; padding:20px;">
+<div class="product-container">
+
+    <!-- Name & Price -->
+    <h2 id="name"></h2>
+    <h3 id="price"></h3>
+
+    <!-- 🔵 CHANGE YOUR IMAGE LINKS ONLY -->
+    <img  id="img1" class="product-img" src="premro img/4.jpg">  <!-- 🔵 change -->
+    <img id="img2" class="product-img" src="premro img/5.jpg">  <!-- 🔵 change -->
+
+    <!-- Image Switcher -->
+    <div style="margin-top:10px;">
+        <a class="img" href="#img1" onclick="switchImg(1)">⬅ Previous IMG</a> |
+        <a class="img" href="#img2" onclick="switchImg(2)">Next ➡ IMG</a>
+    </div>
+
+    <div style=" margin-top:10px ">
+    <button onclick="window.location.href='product8.html'" class="switcher">Previous product</button>
+    <button onclick="window.location.href='product10.html'" class="switcher">Next product</button>
+    </div>
+
+    <p style="margin-top:15px; color:#555;">
+        YVES BISSOUMA MATCH ATTAX TRADING CARD GAME.
+    </p>
+
+    <!-- Buttons -->
+    <div id="buttons">
+        <button class="add-tocart" id="addCartBtn">Add to Cart</button>
+        <button class="add-tocart" id="preorderBtn" style="display:none;">Pre-Order</button>
+        <button onclick="window.location.href='chek out.html'"  class="buy-now">BUY NOW</button>
+    </div>
+</div>
+    <script>
+
+        /* Insert name + price into page */
+        document.getElementById("name").innerText = PRODUCT_NAME;
+        document.getElementById("price").innerText = "Price: " + PRODUCT_PRICE + " LE";
+
+        /* Image switcher function */
+        function switchImg(imgNum) {
+            document.getElementById("img1").style.display = imgNum === 1 ? "block" : "none";
+            document.getElementById("img2").style.display = imgNum === 2 ? "block" : "none";
+        }
+
+        /* Show correct buttons (Add to Cart OR Pre-order) */
+        function updateButtons() {
+            const addBtn = document.getElementById("addCartBtn");
+            const preBtn = document.getElementById("preorderBtn");
+
+            if (inStock === false) {
+                addBtn.style.display = "none";
+                preBtn.style.display = "block";
+            }
+        }
+        updateButtons();
+
+        /* Add to Cart Button */
+        document.getElementById("addCartBtn").onclick = function () {
+            addToCart(PRODUCT_ID, PRODUCT_NAME, PRODUCT_PRICE, document.getElementById("img1").src);
+        };
+
+        /* Pre-order Button */
+        document.getElementById("preorderBtn").onclick = function () {
+            addToCart(PRODUCT_ID + "-preorder", PRODUCT_NAME + " (Pre-Order)", PRODUCT_PRICE, document.getElementById("img1").src);
+        };
+
+    </script>
+
+</body>
+</html>

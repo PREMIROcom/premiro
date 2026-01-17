@@ -1,0 +1,369 @@
+/* ===========================
+   PAYMENT METHOD SELECTION - Professional CSS
+   Clean & Responsive
+   =========================== */
+
+/* Reset & Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Colors */
+  --primary-color: #00a86b;
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.15);
+  --transition: 0.3s ease;
+  
+  /* Spacing */
+  --gap: clamp(1rem, 2vw, 1.5rem);
+  --button-width: clamp(180px, 40vw, 250px);
+  --button-height: clamp(50px, 10vw, 70px);
+}
+
+/* ===========================
+   CONTAINER
+   =========================== */
+
+.div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  gap: var(--gap);
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* ===========================
+   PAYMENT BUTTONS - Base Style
+   =========================== */
+
+.cash,
+.onlinen {
+  /* Size - Responsive */
+  width: var(--button-width);
+  height: var(--button-height);
+  
+  /* Background Image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+  /* Styling */
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  
+  /* Text */
+  color: transparent;
+  font-weight: bold;
+  font-size: clamp(0.9rem, 2vw, 1.1rem);
+  
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  /* Animation */
+  transition: all var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ===========================
+   INDIVIDUAL BUTTON BACKGROUNDS
+   =========================== */
+
+/* Cash Payment Button */
+.cash {
+  background-image: url("../premro%20img/cenoa-featured-image-pros-cons-buying-usd.png");
+}
+
+/* Online Payment Button */
+.onlinen {
+  background-image: url("../premro%20img/online-payment-icon-flat-style-mobile-transaction-vector-illustration-isolated-background-pay-information-sign-business-concept_157943-1378.avif");
+}
+
+/* ===========================
+   HOVER EFFECTS
+   =========================== */
+
+.cash:hover,
+.onlinen:hover {
+  /* Brightness & Lift */
+  filter: brightness(1.15);
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+  
+  /* Border Enhancement */
+  border-color: var(--primary-color);
+}
+
+/* Active State */
+.cash:active,
+.onlinen:active {
+  transform: translateY(-2px) scale(1);
+  box-shadow: var(--shadow-md);
+}
+
+/* ===========================
+   ACCESSIBILITY & FOCUS
+   =========================== */
+
+.cash:focus-visible,
+.onlinen:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+/* ===========================
+   BUTTON LABELS
+   =========================== */
+
+/* Add text label overlay */
+.cash::before,
+.onlinen::before {
+  content: attr(aria-label);
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #333;
+  font-size: 0.85rem;
+  font-weight: 600;
+  white-space: nowrap;
+  opacity: 0;
+  transition: all var(--transition);
+  text-shadow: 0 2px 4px rgba(255, 255, 255, 0.8);
+}
+
+.cash:hover::before,
+.onlinen:hover::before {
+  opacity: 1;
+  bottom: -35px;
+}
+
+/* ===========================
+   LOADING STATE
+   =========================== */
+
+.cash.loading,
+.onlinen.loading {
+  pointer-events: none;
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cash.loading::after,
+.onlinen.loading::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+  border-top-color: var(--primary-color);
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ===========================
+   SELECTED STATE
+   =========================== */
+
+.cash.selected,
+.onlinen.selected {
+  border-color: var(--primary-color);
+  border-width: 4px;
+  box-shadow: 0 0 0 4px rgba(0, 168, 107, 0.2), var(--shadow-lg);
+  filter: brightness(1.1);
+}
+
+.cash.selected::after,
+.onlinen.selected::after {
+  content: '✓';
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background-color: var(--primary-color);
+  color: white;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ===========================
+   DISABLED STATE
+   =========================== */
+
+.cash.disabled,
+.onlinen.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+  filter: grayscale(80%);
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+@media (max-width: 768px) {
+  .div {
+    gap: clamp(0.75rem, 3vw, 1rem);
+    padding: 1.5rem 0.75rem;
+  }
+  
+  .cash,
+  .onlinen {
+    border-width: 2px;
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .div {
+    justify-content: flex-start;
+    padding-top: 3rem;
+  }
+  
+  .cash,
+  .onlinen {
+    width: min(85vw, 220px);
+    height: clamp(45px, 12vw, 65px);
+  }
+  
+  .cash::before,
+  .onlinen::before {
+    font-size: 0.75rem;
+  }
+}
+
+/* Landscape phones */
+@media (max-height: 500px) and (orientation: landscape) {
+  .div {
+    min-height: auto;
+    padding: 2rem 1rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+/* ===========================
+   ACCESSIBILITY IMPROVEMENTS
+   =========================== */
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .cash,
+  .onlinen {
+    transition: none;
+  }
+  
+  .cash:hover,
+  .onlinen:hover {
+    transform: none;
+  }
+  
+  .cash.loading::after,
+  .onlinen.loading::after {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .cash,
+  .onlinen {
+    border-width: 4px;
+    border-color: #000;
+  }
+}
+
+/* ===========================
+   ANIMATION EFFECTS
+   =========================== */
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cash,
+.onlinen {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.cash {
+  animation-delay: 0.1s;
+}
+
+.onlinen {
+  animation-delay: 0.2s;
+}
+
+/* ===========================
+   INTERACTIVE FEEDBACK
+   =========================== */
+
+/* Ripple effect on click */
+.cash:active::before,
+.onlinen:active::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+  to {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+  }
+}
+
+/* ===========================
+   HEADING/TITLE (Optional)
+   =========================== */
+
+.div::before {
+  content: 'Select Payment Method';
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: var(--spacing-md);
+  text-align: center;
+  order: -1;
+}
+
+/* Remove heading if not needed */
+.div.no-title::before {
+  display: none;
+}
